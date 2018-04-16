@@ -1,0 +1,54 @@
+<:Head>
+	<title>Docker Images</title>
+</:Head>
+
+<Layout page='images'>
+	<ul>
+		{{#each repositories as repository}}
+		<li>
+			<a>
+				{{repository}}
+			</a>
+		</li>
+		{{/each}}
+	</ul>
+</Layout>
+
+<style>
+	ul {
+		list-style-type: none;
+	}
+
+	ul li {
+		background-color: lightgray;
+		border-bottom: 4px solid darkred;
+		padding: 2vw 4vh;
+		margin: 0.6vw 0.6vh;
+	}
+</style>
+
+<script>
+	import Layout from './_components/Layout.html'
+
+	export default {
+		data () {
+			return {
+				repositories: []
+			}
+		},
+
+		oncreate () {
+			return fetch(`/images.json`)
+			.then(response => {
+				return response.json()
+			})
+			.then(json => {
+				this.set({ repositories: json.repositories })
+			})
+		},
+
+		components: {
+			Layout
+		}
+	};
+</script>
