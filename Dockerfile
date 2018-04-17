@@ -2,8 +2,13 @@ FROM node:9-alpine
 
 WORKDIR /build
 
-COPY package.json package-lock.json app assets routes webpack /build
+COPY . /build
+RUN npm install && npm run export
 
-RUN npm install
+WORKDIR /app
 
-CMD sapper start
+COPY /export /app
+RUN rm -rf /build
+RUN npm install -g http-server
+
+CMD http-server /app
