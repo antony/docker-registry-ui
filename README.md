@@ -13,7 +13,7 @@ services:
     environment:
       DOCKER_REGISTRY_URL: https://your-registry-url
       DOCKER_REGISTRY_AUTH_HEADER: Basic xxyyzz
-      SSL_ENABLED: true
+      SSL_ENABLED: "true"
       SSL_CERT_PATH: /opt/certs/cert.pem
       SSL_KEY_PATH: /opt/certs/key.pem
     ports:
