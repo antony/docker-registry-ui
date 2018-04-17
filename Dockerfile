@@ -11,4 +11,4 @@ RUN npm install && \
 
 WORKDIR /app
 
-CMD http-server .
+CMD [[ $SSL_ENABLED = true ]] && $(http-server -S -K $SSL_KEY_PATH -C $SSL_CERT_PATH .) || $(http-server .) 
