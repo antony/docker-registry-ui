@@ -7,7 +7,7 @@ export function get(req, res) {
   return fetch(apiUrl, {
     headers: {
       'content-type': 'application/json',
-      Authorization: 'Basic YWI6TTNjNG0xQm1uSCVJ'
+      Authorization: process.env.DOCKER_REGISTRY_AUTH_HEADER
     }
   })
   .then(response => {
