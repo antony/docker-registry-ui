@@ -6,7 +6,7 @@
 	<ul>
 		{{#each repositories as repository}}
 		<li>
-			<a>
+			<a href="image/{{ encodeURIComponent(repository) }}">
 				{{repository}}
 			</a>
 		</li>
@@ -20,8 +20,7 @@
 	}
 
 	ul li {
-		background-color: lightgray;
-		border-bottom: 4px solid darkred;
+		border-left: 4px solid darkred;
 		padding: 2vw 4vh;
 		margin: 0.6vw 0.6vh;
 	}
@@ -37,14 +36,10 @@
 			}
 		},
 
-		oncreate () {
+		preload () {
 			return fetch(`/images.json`)
-			.then(response => {
-				return response.json()
-			})
-			.then(json => {
-				this.set({ repositories: json.repositories })
-			})
+			.then(response => response.json())
+			.then(({ repositories }) => { repositories })
 		},
 
 		components: {

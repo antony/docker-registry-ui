@@ -1,7 +1,8 @@
-import proxy from './_proxy'
+import proxy from '../_proxy'
 
 export function get(req, res) {
-  proxy('_catalog')
+	const { image } = req.params
+  proxy(`${image}/tags/list`)
   .then(({ statusCode, headers, content }) => {
     res.writeHead(statusCode, headers)
     res.end(content)

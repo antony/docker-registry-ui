@@ -1,0 +1,52 @@
+<:Head>
+	<title>Docker image {{ name }}</title>
+</:Head>
+
+<Layout page='image'>
+	<h1>Image {{ name }}</h1>
+
+	<ul>
+		{{#each tags as tag}}
+		<li>
+			<a>
+				{{tag}}
+			</a>
+		</li>
+		{{/each}}
+	</ul>
+</Layout>
+
+<style>
+	h1 {
+		border-bottom: 4px solid darkred;
+		padding: 2vw 4vh;
+		margin: 0.6vw 0.6vh;
+	}
+
+	ul {
+		list-style-type: none;
+	}
+
+	ul li {
+		border-left: 4px solid darkblue;
+		padding: 2vw 4vh;
+		margin: 0.6vw 0.6vh;
+	}
+</style>
+
+<script>
+	import Layout from '../_components/Layout.html';
+
+	export default {
+		components: {
+			Layout
+		},
+
+		preload({ params, query }) {
+			const { image } = params
+			return fetch(`image/${image}.json`)
+			.then(response => response.json())
+			.then(({ name, tags }) => { name, tags })
+		}
+	}
+</script>
