@@ -1,6 +1,6 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "docker-registry-ui",
+  "description": "docker registry ui",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",

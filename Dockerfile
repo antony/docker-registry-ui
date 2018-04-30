@@ -3,12 +3,13 @@ FROM node:9-alpine
 WORKDIR /build
 
 COPY . .
-RUN npm install && \
-  npm install -g http-server && \
-  npm run export && \
-  mv /build/export /app && \
-  rm -rf /build
+RUN npm install && npm run export
 
-WORKDIR /app
+FROM nginx:alpine
 
-CMD [[ $SSL_ENABLED = "true" ]] && $(http-server -S -K $SSL_KEY_PATH -C $SSL_CERT_PATH -P $DOCKER_REGISTRY_URL .) || $(http-server  -P $DOCKER_REGISTRY_URL .) 
+COPY --from=0 /build/export /usr/share/nginx/html
+COPY docker /
+
+EXPOSE 443
+
+CMD ["sh", "/start.sh"]

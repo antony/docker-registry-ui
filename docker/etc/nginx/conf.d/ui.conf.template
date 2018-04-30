@@ -1,0 +1,13 @@
+ssl_certificate     $SSL_CERT_PATH;
+ssl_certificate_key $SSL_KEY_PATH;
+ssl_ciphers         EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH;
+ssl_protocols       TLSv1.1 TLSv1.2;
+
+server {
+  listen              443 ssl default_server;
+  server_name         $SERVER_NAME;
+  root                /usr/share/nginx/html;
+
+  auth_basic "Restricted";
+  auth_basic_user_file $BASIC_AUTH_HTPASSWD_FILE;
+}

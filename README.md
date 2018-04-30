@@ -12,7 +12,8 @@ services:
     image: antony/docker-registry-ui:latest
     environment:
       DOCKER_REGISTRY_URL: https://your-registry-url
-      DOCKER_REGISTRY_AUTH_HEADER: Basic xxyyzz
+      DOCKER_REGISTRY_USERNAME: aaa
+      DOCKER_REGISTRY_USERNAME: bbb
       SSL_ENABLED: "true"
       SSL_CERT_PATH: /opt/certs/cert.pem
       SSL_KEY_PATH: /opt/certs/key.pem
@@ -20,6 +21,13 @@ services:
       - 80:8080
     volumes:
       - type: bind
-        source: /home/ab/assets/certs
+        source: /home/xyz/my-certs
         target: /opt/certs
+```
+
+Or run it as follows:
+
+```bash
+docker run -p 443:443 --mount type=bind,source=/home/xyz/my-certs,target=/vol -e SERVER_NAME=some.host.name -e BASIC_AUTH_HTPASSWD_FILE=/vol/htpasswd -e SSL_CERT_PATH=/vol/cert.pem -e SSL_KEY_PATH=/vol/key.pem antony/docker-registry-ui
+
 ```

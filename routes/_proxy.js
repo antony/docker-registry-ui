@@ -1,13 +1,16 @@
 import fetch from 'node-fetch'
 
 export default function proxy(endpoint) {
-  const apiUrl = `/v2/${endpoint}`
+  const apiUrl = `${process.env.DOCKER_REGISTRY_URL}/v2/${endpoint}`
+  const auth = `${process.env.DOCKER_REGISTRY_USERNAME}:${process.env.DOCKER_REGISTRY_PASSWORD}`
+  const encodedAuth = Buffer.from(auth).toString('base64')
 
   return fetch(apiUrl, {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: process.env.DOCKER_REGISTRY_AUTH_HEADER
-    }
+      Authorization: `Basic ${encodedAuth}`
+    },
+    mode: 'no-cors'
   })
   .then(response => {
     return response.text()

@@ -44,7 +44,7 @@
 			const { image } = params
 			return fetch(`image/${image}.json`)
 			.then(response => response.json())
-			.then(({ name, tags }) => { name, tags })
+			.then(({ name, tags }) => ({ name, tags }))
 		}
 	}
 </script>
