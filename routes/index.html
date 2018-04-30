@@ -1,22 +1,22 @@
-<:Head>
+<svelte:head>
 	<title>Docker Images</title>
-</:Head>
+</svelte:head>
 
 <Layout page='images'>
-	{{#if repositories.length}}
-	<p>{{repositories.length}} Repositories</p>
+	{#if repositories.length}
+	<p>{repositories.length} Repositories</p>
 	<ul>
-		{{#each repositories as repository}}
+		{#each repositories as repository}
 		<li>
-			<a href="image/{{ encodeURIComponent(repository) }}">
-				{{repository}}
+			<a href="image/{ encodeURIComponent(repository) }">
+				{repository}
 			</a>
 		</li>
-		{{/each}}
+		{/each}
 	</ul>
-	{{else}}
+	{else}
 	<p>No repositories to show.</p>
-	{{/if}}
+	{/if}
 </Layout>
 
 <style>

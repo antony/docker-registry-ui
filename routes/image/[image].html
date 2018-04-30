@@ -1,16 +1,16 @@
-<:Head>
-	<title>Docker image {{ name }}</title>
-</:Head>
+<svelte:head>
+	<title>Docker image { name }</title>
+</svelte:head>
 
 <Layout page='image'>
-	<h1>Image {{ name }}</h1>
+	<h1>Image { name }</h1>
 
 	<ul>
-		{{#each tags as tag}}
+		{#each tags as tag}
 		<li>
-			{{tag}}
+			{tag}
 		</li>
-		{{/each}}
+		{/each}
 	</ul>
 </Layout>
 
